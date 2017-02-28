@@ -6,20 +6,22 @@
 #### By Gloria Friesen and Mark Fisher
 
 ## Description
-
-...
+Webpage to create bank account with initial deposit, and ability to deposit, withdraw, and display current balance
 
 ### Specifications
 
 |Behavior|Input|Output|
 |:---:|:---:|:---:|
-|Creates a new account and returns the name correctly|"Gloria Friesen"|"Gloria Friesen"
-|Creates a new account with an initial deposit|"Name: Gloria Friesen, Initial Deposit: $500"|"Gloria Friesen, $500"|
+|Creates a user account and returns the account holder's name|"Gloria Friesen"|"Gloria Friesen"|
+|Creates a user account and returns the account holder's telephone number|(802)-555-5555|(802)-555-5555|
+|Creates a user account and return the account holder's address|123 Maple Lane Portland, OR 97217|123 Maple Lane Portland, OR 97217|
+|Creates a new bank account and returns the name correctly|"checking"|"checking"|
+|Creates a new bank account with an initial deposit|"Name: Gloria Friesen, Initial Deposit: $500"|"Gloria Friesen, $500"|
 |Shows current balance|"$500"|"$500"|
 |Subtracts withdrawal from current balance|"Withdrawal: $20"|"Current balance: $480"|
 |Adds deposit to current balance|"Deposit: $20"|"Current balance: $520"|
-||||
-||||
+|Adds bank account information to user account|"Gloria Friesen"|Gloria Friesen: 123 Maple Lane Portland, OR 97217; (802)-555-5555; Checking: $500|
+
 
 ## Setup/Installation Requirements
 
