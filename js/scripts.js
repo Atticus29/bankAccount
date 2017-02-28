@@ -14,6 +14,19 @@ BankAccount.prototype.withdraw = function(moneyToSubtract){
   this.accountBalance -= moneyToSubtract;
 }
 
+function UsrAccount (name, phone, street, city, state, account) {
+  this.name = name;
+  this.phone = phone;
+  this.street = street;
+  this.city = city;
+  this.state = state;
+  this.account = account;
+}
+
+UsrAccount.prototype.fullAddress = function() {
+  return this.street + " " + this.city + " , " + this.state;
+}
+
 // Front End
 $(function(){
   $("#userAccountForm").submit(function(){
@@ -23,17 +36,29 @@ $(function(){
     var usrStreet = $("#streetInput").val();
     var usrCity = $("#cityInput").val();
     var usrState = $("#stateDropdown").val();
-    // console.log(usrName, usrPhone,usrStreet,usrCity,usrState);
+    var usrAccountName = $("#createAccountName").val();
+    var usrInitialDeposit = parseFloat($("#initialDeposit").val())
+    var currentUsrBankAccount = new BankAccount(usrAccountName, usrInitialDeposit);
+    currentUsrAccount = new UsrAccount (usrName, usrPhone, usrStreet, usrCity, usrState, [currentUsrBankAccount]);
+    currentUsrAccount.fullAddress()
+    // console.log(currentUsrAccount);
+      // console.log(usrName, usrPhone,usrStreet,usrCity,usrState);
     // potentially make function
   });
   $("#bankAccountForm").submit(function(){
     event.preventDefault();
-    $("#optionsDiv").show();
-    $("#bankAccountLogin").hide();
-    var usrAccountName = $("#accountName").val();
-    var usrInitialDeposit = parseFloat($("#initialDeposit").val());
+
+    var accountLookup = $("#accountName").val();
+    // console.log(currentUsrAccount);
+    // console.log(currentUsrAccount.account[0].accountName);
+    // console.log(currentUsrAccount.account[0]);
+    if (accountLookup === currentUsrAccount.account[0].accountName) {
+      $("#optionsDiv").show();
+      $("#bankAccountLogin").hide();
+    }
+    // console.log(currentUsrAccount);
     // console.log("usrInitialDeposit is a " + typeof usrInitialDeposit);
-    var currentUsrBankAccount = new BankAccount(usrAccountName, usrInitialDeposit);
+
     // console.log("whole object is " + currentUsrBankAccount);
     $("#withdrawBtn").click(function(){
       // console.log("You want to withdraw");
@@ -57,16 +82,16 @@ $(function(){
       // console.log("You just want to know things");
       // $("#displayDiv").show();
       $("#displayDiv").empty();
-      $("#displayDiv").append("<h3>" + currentUsrBankAccount.accountBalance + "</h3>");
+      $("#displayDiv").append("<h3>" + currentUsrAccount.account[0].accountBalance + "</h3>");
     });
     $("#moneyChangerForm").submit(function(){
       event.preventDefault();
       $("#moneyChanger").hide();
       var howMuch = parseFloat($("#howMuchInput").val());
       if ($("#moneyChanger").hasClass("withdrawy")){
-        currentUsrBankAccount.withdraw(howMuch);
+        currentUsrAccount.account[0].withdraw(howMuch);
       }else if($("#moneyChanger").hasClass("deposity")){
-        currentUsrBankAccount.deposit(howMuch);
+        currentUsrAccount.account[0].deposit(howMuch);
       }
       // console.log("howMuch is a " + typeof howMuch);
       // console.log(currentUsrBankAccount.accountBalance);
