@@ -4,3 +4,9 @@
 .row{
   margin-left: 3%;
 }
+#moneyChanger{
+  display: none;
+}
+/*#displayDiv{
+  display: none;
+}*/
