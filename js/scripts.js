@@ -29,6 +29,14 @@ UsrAccount.prototype.fullAddress = function() {
 
 // Front End
 $(function(){
+  $("#createNew").click(function(){
+    $("#landing").hide();
+    $("#userAccountForm").fadeIn();
+  });
+  $("#loginExisting").click(function(){
+    $("#landing").hide();
+    $("#bankAccountLogin").fadeIn();
+  });
   $("#userAccountForm").submit(function(){
     event.preventDefault();
     var usrName = $("#nameInput").val();
@@ -40,7 +48,9 @@ $(function(){
     var usrInitialDeposit = parseFloat($("#initialDeposit").val())
     var currentUsrBankAccount = new BankAccount(usrAccountName, usrInitialDeposit);
     currentUsrAccount = new UsrAccount (usrName, usrPhone, usrStreet, usrCity, usrState, [currentUsrBankAccount]);
-    currentUsrAccount.fullAddress()
+    $("#userAccountForm").hide();
+    $("#landing").show();
+    // currentUsrAccount.fullAddress()
     // console.log(currentUsrAccount);
       // console.log(usrName, usrPhone,usrStreet,usrCity,usrState);
     // potentially make function

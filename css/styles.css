@@ -10,3 +10,12 @@
 /*#displayDiv{
   display: none;
 }*/
+#userAccountForm{
+  display: none;
+}
+#bankAccountLogin{
+  display: none;
+}
+#landing{
+  padding-top: 3%;
+}
