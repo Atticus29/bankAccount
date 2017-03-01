@@ -29,14 +29,17 @@ UsrAccount.prototype.fullAddress = function() {
 
 // Front End
 $(function(){
+
   $("#createNew").click(function(){
     $("#landing").hide();
     $("#userAccountForm").fadeIn();
   });
+
   $("#loginExisting").click(function(){
     $("#landing").hide();
     $("#bankAccountLogin").fadeIn();
   });
+
   $("#userAccountForm").submit(function(){
     event.preventDefault();
     var usrName = $("#nameInput").val();
@@ -50,47 +53,30 @@ $(function(){
     currentUsrAccount = new UsrAccount (usrName, usrPhone, usrStreet, usrCity, usrState, [currentUsrBankAccount]);
     $("#userAccountForm").hide();
     $("#landing").show();
-    // currentUsrAccount.fullAddress()
-    // console.log(currentUsrAccount);
-      // console.log(usrName, usrPhone,usrStreet,usrCity,usrState);
     // potentially make function
   });
+
   $("#bankAccountForm").submit(function(){
     event.preventDefault();
-
     var accountLookup = $("#accountName").val();
-    // console.log(currentUsrAccount);
-    // console.log(currentUsrAccount.account[0].accountName);
-    // console.log(currentUsrAccount.account[0]);
-    if (accountLookup === currentUsrAccount.account[0].accountName) {
+    if (accountLookup && currentUsrAccount.account[0].accountName && accountLookup === currentUsrAccount.account[0].accountName) {
       $("#optionsDiv").show();
+      $("#optionsDiv").append("<h2>Welcome to the bank, " + currentUsrAccount.name + "</h2>");
       $("#bankAccountLogin").hide();
     }
-    // console.log(currentUsrAccount);
-    // console.log("usrInitialDeposit is a " + typeof usrInitialDeposit);
-
-    // console.log("whole object is " + currentUsrBankAccount);
     $("#withdrawBtn").click(function(){
-      // console.log("You want to withdraw");
       $("#moneyChanger").show();
       $("#moneyChanger").removeClass("withdrawy");
       $("#moneyChanger").removeClass("deposity");
       $("#moneyChanger").addClass("withdrawy");
-
-      // console.log(currentUsrBankAccount.accountBalance);
     });
     $("#depositBtn").click(function(){
-      // console.log("You want to deposit");
       $("#moneyChanger").show();
       $("#moneyChanger").removeClass("withdrawy");
       $("#moneyChanger").removeClass("deposity");
       $("#moneyChanger").addClass("deposity");
-
-      // console.log(currentUsrBankAccount.accountBalance);
     });
     $("#balanceBtn").click(function(){
-      // console.log("You just want to know things");
-      // $("#displayDiv").show();
       $("#displayDiv").empty();
       $("#displayDiv").append("<h3>" + currentUsrAccount.account[0].accountBalance + "</h3>");
     });
@@ -103,9 +89,12 @@ $(function(){
       }else if($("#moneyChanger").hasClass("deposity")){
         currentUsrAccount.account[0].deposit(howMuch);
       }
-      // console.log("howMuch is a " + typeof howMuch);
-      // console.log(currentUsrBankAccount.accountBalance);
     });
-    // console.log(usrAccountName,usrInitialDeposit);
   });
+
+
+  $("#exit").click(function(){
+    $("#bankAccountLogin").hide();
+    $("#landing").fadeIn();
+  })
 });
