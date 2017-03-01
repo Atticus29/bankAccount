@@ -1,5 +1,7 @@
 #optionsDiv{
   display: none;
+  text-align: center;
+  padding-top: 3%;
 }
 .row{
   margin-left: 3%;
@@ -18,4 +20,8 @@
 }
 #landing{
   padding-top: 3%;
+  text-align: center;
+}
+#welcome-message, #balance-message, #balance-display{
+  text-align: center;
 }

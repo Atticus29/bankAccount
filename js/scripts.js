@@ -61,7 +61,11 @@ $(function(){
     var accountLookup = $("#accountName").val();
     if (accountLookup && currentUsrAccount.account[0].accountName && accountLookup === currentUsrAccount.account[0].accountName) {
       $("#optionsDiv").show();
-      $("#optionsDiv").append("<h2>Welcome to the bank, " + currentUsrAccount.name + "</h2>");
+      $("#optionsDiv").append("<h3 id='welcome-message'>Welcome to the bank, " + currentUsrAccount.name + "</h3>");
+      $("#optionsDiv").append("<h4 id='balance-message'>Your balance is: </h4>");
+      $("#displayDiv").show();
+      $("#displayDiv").empty();
+      $("#displayDiv").append("<h3 id='balance-display'>" + currentUsrAccount.account[0].accountBalance + "</h3>");
       $("#bankAccountLogin").hide();
     }
     $("#withdrawBtn").click(function(){
@@ -78,17 +82,20 @@ $(function(){
     });
     $("#balanceBtn").click(function(){
       $("#displayDiv").empty();
-      $("#displayDiv").append("<h3>" + currentUsrAccount.account[0].accountBalance + "</h3>");
+      $("#displayDiv").append("<h3 id='balance-display'>" + currentUsrAccount.account[0].accountBalance + "</h3>");
     });
     $("#moneyChangerForm").submit(function(){
       event.preventDefault();
       $("#moneyChanger").hide();
+      // $("");
       var howMuch = parseFloat($("#howMuchInput").val());
       if ($("#moneyChanger").hasClass("withdrawy")){
         currentUsrAccount.account[0].withdraw(howMuch);
       }else if($("#moneyChanger").hasClass("deposity")){
         currentUsrAccount.account[0].deposit(howMuch);
       }
+      $("#displayDiv").empty();
+      $("#displayDiv").append("<h3 id='balance-display'>" + currentUsrAccount.account[0].accountBalance + "</h3>");
     });
   });
 
